@@ -4,7 +4,8 @@ import numpy as np
 import joblib
 
 # Path to training images
-DATA_DIR = "../data/train"
+DATA_DIR = "data/train"
+
 
 # Lists to store embeddings and labels
 X = []
@@ -44,5 +45,5 @@ print(f"✅ Extracted {len(X)} face embeddings.")
 os.makedirs("../models", exist_ok=True)
 
 # Save embeddings & labels
-joblib.dump((X, y), "../models/embeddings.pkl")
+joblib.dump({'embeddings': X, 'names': y}, "../models/embeddings.pkl")
 print("✅ Saved embeddings to models/embeddings.pkl")
