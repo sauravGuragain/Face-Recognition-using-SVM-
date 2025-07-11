@@ -76,7 +76,8 @@ def video_loop():
 
             # this to play welcome sound if new person and confident
             if best_prob > 0.7 and pred != last_name:
-                playsound("welcome.mp3")  # this should be in same folder
+                mp3_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "welcome.mp3")
+                playsound(mp3_path)  
                 last_name = pred
 
         # To Convert frame for Tkinter
