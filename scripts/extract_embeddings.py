@@ -4,7 +4,7 @@ import numpy as np
 import joblib
 
 #this is the path to training images
-DATA_DIR = "data/train"
+DATA_DIR = "../data/train"
 
 
 # this are Lists to store embeddings and labels

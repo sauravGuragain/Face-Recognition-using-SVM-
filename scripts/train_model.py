@@ -2,17 +2,19 @@ import joblib
 import os
 from sklearn.svm import SVC
 
-# This Load embeddings and labels (it is saved as tuple)
-embeddings, labels = joblib.load('../models/embeddings.pkl')
+# ✅ Load embeddings and labels (dict, not tuple!)
+data = joblib.load("../models/embeddings.pkl")
+embeddings = data["embeddings"]
+labels = data["names"]
 
 print(f"[INFO] Loaded {len(embeddings)} embeddings with {len(set(labels))} unique classes.")
 
-# this train SVM classifier
+# ✅ Train SVM classifier
 print("[INFO] Training SVM classifier...")
 model = SVC(C=1.0, kernel="linear", probability=True)
 model.fit(embeddings, labels)
 
-# This Save trained model
+# ✅ Save trained model
 os.makedirs("../models", exist_ok=True)
 joblib.dump(model, "../models/face_recognition_svm.pkl")
 
