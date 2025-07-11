@@ -12,6 +12,7 @@ clf = joblib.load("../models/face_recognition_svm.pkl")
 
 
 # This is the GUI setup using tinker
+print("Starting GUI app...")
 root = tk.Tk()
 root.title("Face Recognition GUI")
 
@@ -111,5 +112,7 @@ root.protocol("WM_DELETE_WINDOW", on_close)
 
 
 # this Run GUI
+print("Entering mainloop")
+
 
 root.mainloop()
