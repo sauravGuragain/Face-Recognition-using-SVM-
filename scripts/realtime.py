@@ -2,14 +2,10 @@ import cv2
 import face_recognition
 import joblib
 
-# -------------------------------
-# 1️⃣ Load trained model
-# -------------------------------
+#loads train modela
 clf = joblib.load("../models/face_recognition_svm.pkl")
 
-# -------------------------------
-# 2️⃣ Open webcam
-# -------------------------------
+#this opens webcam
 video_capture = cv2.VideoCapture(0)  # 0 = default camera
 
 if not video_capture.isOpened():
@@ -18,9 +14,7 @@ if not video_capture.isOpened():
 
 print("🎥 Starting webcam. Press 'q' to quit.")
 
-# -------------------------------
-# 3️⃣ Loop frames
-# -------------------------------
+#this to loop throgh frames
 while True:
     ret, frame = video_capture.read()
     if not ret:
@@ -58,9 +52,7 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break
 
-# -------------------------------
-# 4️⃣ Cleanup
-# -------------------------------
+#cleanup
 video_capture.release()
 cv2.destroyAllWindows()
 print("👋 Webcam stopped. Bye!")

@@ -6,14 +6,11 @@ import joblib
 from PIL import Image, ImageTk
 from playsound import playsound
 
-# -------------------------------
-# 1️⃣ Load trained SVM model
-# -------------------------------
+# THIS TO Load trained SVM model
 clf = joblib.load("../models/face_recognition_svm.pkl")
 
-# -------------------------------
-# 2️⃣ GUI setup
-# -------------------------------
+
+# This is the GUI setup using tinker
 root = tk.Tk()
 root.title("Face Recognition GUI")
 
@@ -27,12 +24,10 @@ video_label.pack()
 
 running = False
 
-# Track last name for sound
+# this is for sound it have track name
 last_name = None
 
-# -------------------------------
-# 3️⃣ Camera loop function
-# -------------------------------
+#  This is for Camera using loop function
 def start_camera():
     global running
     running = True
@@ -67,7 +62,7 @@ def video_loop():
             best_prob = probs[best_idx]
             pred = clf.classes_[best_idx]
 
-            # Draw box and label
+            # This Draw's box and label
             cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
             cv2.putText(
                 frame,
@@ -79,12 +74,12 @@ def video_loop():
                 2,
             )
 
-            # Play welcome sound if new person and confident
+            # this to play welcome sound if new person and confident
             if best_prob > 0.7 and pred != last_name:
-                playsound("welcome.mp3")  # Ensure you have this in same folder
+                playsound("welcome.mp3")  # this should be in same folder
                 last_name = pred
 
-        # Convert frame for Tkinter
+        # To Convert frame for Tkinter
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         img = Image.fromarray(rgb_frame)
         imgtk = ImageTk.PhotoImage(image=img)
@@ -103,9 +98,7 @@ def on_close():
     stop_camera()
     root.destroy()
 
-# -------------------------------
-# 4️⃣ Buttons
-# -------------------------------
+# for Buttons
 btn_start = tk.Button(root, text="Start Camera", command=start_camera, bg="green", fg="white", height=2, width=20)
 btn_start.pack(pady=10)
 
@@ -113,7 +106,7 @@ btn_stop = tk.Button(root, text="Stop Camera", command=stop_camera, bg="red", fg
 btn_stop.pack(pady=10) 
 root.protocol("WM_DELETE_WINDOW", on_close)
 
-# -------------------------------
-# 5️⃣ Run GUI
-# -------------------------------
+
+# this Run GUI
+
 root.mainloop()

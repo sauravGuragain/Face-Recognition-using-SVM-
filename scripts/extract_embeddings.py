@@ -3,15 +3,15 @@ import face_recognition
 import numpy as np
 import joblib
 
-# Path to training images
+#this is the path to training images
 DATA_DIR = "data/train"
 
 
-# Lists to store embeddings and labels
+# this are Lists to store embeddings and labels
 X = []
 y = []
 
-# Loop through each person folder
+# this Loops through each person folder
 for person_name in os.listdir(DATA_DIR):
     person_dir = os.path.join(DATA_DIR, person_name)
     if not os.path.isdir(person_dir):
@@ -25,14 +25,14 @@ for person_name in os.listdir(DATA_DIR):
 
         image = face_recognition.load_image_file(img_path)
 
-        # Find face locations
+        # thi sto find face locations
         face_locations = face_recognition.face_locations(image)
 
         if len(face_locations) == 0:
             print(f"   ⚠️  No face found in {img_name}. Skipping.")
             continue
 
-        # Get face encodings
+        # this gets face encodings
         face_encodings = face_recognition.face_encodings(image, face_locations)
 
         for encoding in face_encodings:
@@ -41,9 +41,9 @@ for person_name in os.listdir(DATA_DIR):
 
 print(f"✅ Extracted {len(X)} face embeddings.")
 
-# Make sure models folder exists
+# models folder
 os.makedirs("../models", exist_ok=True)
 
-# Save embeddings & labels
+#to Save embeddings & labels
 joblib.dump({'embeddings': X, 'names': y}, "../models/embeddings.pkl")
 print("✅ Saved embeddings to models/embeddings.pkl")
